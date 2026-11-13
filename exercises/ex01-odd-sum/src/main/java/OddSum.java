@@ -8,9 +8,7 @@
  *
  * Relevant readings: 1.6. Arrays and 1.8.2. for Loops.
  */
-public class OddSum {
-
-    public static void main(String[] args) {
+public class OddSum {public static void main(String[] args) {
         int[] numbers = {10, 20, 30, 40, 50};
         // Values at odd indices are 20 (index 1) and 40 (index 3), so this
         // should print 60 once you have implemented oddSum correctly.
