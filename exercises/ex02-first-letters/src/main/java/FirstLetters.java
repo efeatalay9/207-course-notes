@@ -8,24 +8,38 @@
  */
 public class FirstLetters {
 
-    public static void main(String[] args) {
-        String phrase = "Idol Long Oolong Vertical Europe University Toyota";
-        // Should print ILOVEUT once firstLetters is implemented.
-        System.out.println("First letters of \"" + phrase + "\": " + firstLetters(phrase));
-    }
+  public static void main(String[] args) {
+    String phrase = "Idol Long Oolong Vertical Europe University Toyota";
+    // Should print ILOVEUT once firstLetters is implemented.
+    System.out.println("First letters of \"" + phrase + "\": " + firstLetters(phrase));
+  }
 
-    /**
-     * Given a string of words separated by single spaces, returns a new string
-     * made of the first character of each word, in order. You may assume the
-     * input contains at least one word.
-     *
-     * Example: {@code firstLetters("Good Morning")} returns {@code "GM"}.
-     *
-     * @param words a non-empty string of words separated by single spaces
-     * @return the first character of each word, concatenated
-     */
-    public static String firstLetters(String words) {
-        // TODO: complete
-        return "";
+  /**
+   * Given a string of words separated by single spaces, returns a new string
+   * made of the first character of each word, in order. You may assume the
+   * input contains at least one word.
+   *
+   * Example: {@code firstLetters("Good Morning")} returns {@code "GM"}.
+   *
+   * @param words a non-empty string of words separated by single spaces
+   * @return the first character of each word, concatenated
+   */
+  public static String firstLetters(String words) {
+    // TODO: complete
+    StringBuilder result = new StringBuilder("");
+    words = words.trim();
+
+    result.append(words.charAt(0));
+    boolean flag = false;
+    for (int i=0; i<words.length();i++){
+      if (flag) {
+        result.append(words.charAt(i));
+        flag = false;
+      }
+      else if (words.charAt(i) == ' '){
+        flag = true;
+      }
     }
+    return new String(result);
+  }
 }
