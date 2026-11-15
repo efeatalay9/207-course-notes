@@ -3,20 +3,20 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Exercise (Chapter 4: GUIs with Swing) — handling button clicks.
  *
- * This panel shows a label and a button. Your task is to make clicking the
- * button increment a counter and update the label to {@code "Count: N"}. You do
- * this by adding an <em>action listener</em> to the button, as described in
- * Chapter 4.3. Edit only this file.
+ * <p>This panel shows a label and a button. Your task is to make clicking the button increment a
+ * counter and update the label to {@code "Count: N"}. You do this by adding an <em>action
+ * listener</em> to the button, as described in Chapter 4.3. Edit only this file.
  *
- * You can run {@code main} to see the window and click the button yourself, and
- * the tests click the button for you (with {@code button.doClick()}) and check
- * the label.
+ * <p>You can run {@code main} to see the window and click the button yourself, and the tests click
+ * the button for you (with {@code button.doClick()}) and check the label.
  *
- * Relevant reading: 4.3 Handling button clicks.
+ * <p>Relevant reading: 4.3 Handling button clicks.
  */
 public class CounterPanel extends JPanel {
 
@@ -32,6 +32,14 @@ public class CounterPanel extends JPanel {
     //       button.addActionListener(...)). When the button is clicked, its
     //       actionPerformed should increment `count` and then call
     //       label.setText("Count: " + count) so the label shows the new total.
+    button.addActionListener(
+        new ActionListener() {
+          @Override
+          public void actionPerformed(ActionEvent e) {
+            count += 1;
+            label.setText("Count: " + count);
+          }
+        });
   }
 
   /**
@@ -54,13 +62,12 @@ public class CounterPanel extends JPanel {
 
   /** Shows the panel in a window so you can click the button yourself. */
   public static void main(String[] args) {
-    SwingUtilities.invokeLater(
-        () -> {
-          JFrame frame = new JFrame("Counter");
-          frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-          frame.setContentPane(new CounterPanel());
-          frame.pack();
-          frame.setVisible(true);
-        });
+    SwingUtilities.invokeLater(() -> {
+      JFrame frame = new JFrame("Counter");
+      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      frame.setContentPane(new CounterPanel());
+      frame.pack();
+      frame.setVisible(true);
+    });
   }
 }
