@@ -1,3 +1,5 @@
+import com.sun.source.util.SourcePositions;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -109,7 +111,15 @@ public class NumberTriangle {
     //       value of wherever you ended up. An empty path means "stay here".
     //       Hint: String#charAt(int) and String#length() are all you need for the
     //       iterative version; a recursive version can use String#substring(1).
-    return 0;
+    NumberTriangle curr = this;
+
+    for (int i = 0; i<path.length(); i++) {
+      if (path.charAt(i) == 'l') {
+        curr = curr.left;
+      }
+      else {curr = curr.right;}
+    }
+    return curr.root;
   }
 
   /**
@@ -175,11 +185,33 @@ public class NumberTriangle {
     NumberTriangle top = null;
 
     String line = br.readLine();
+    top = new NumberTriangle(Integer.valueOf(line));
+
+    NumberTriangle[] previousRowOfTriangles = {top};
+    line = br.readLine();
+
     while (line != null) {
 
       // Remove this line when you are done; it is here so that the starter code
       // prints the contents of the file when you run it.
-      System.out.println(line);
+      // System.out.println(line);
+
+      String[] newLineArr = line.split(" ");
+      NumberTriangle[] newRowOfTriangles = new NumberTriangle[newLineArr.length];
+      for (int i = 0; i<newLineArr.length ; i++) {
+        newRowOfTriangles[i] = new NumberTriangle(Integer.valueOf(newLineArr[i]));
+      }
+
+      for (int i = 0; i<previousRowOfTriangles.length ; i++) {
+        previousRowOfTriangles[i].setLeft(newRowOfTriangles[i]);
+      }
+
+      for (int i = 0; i<previousRowOfTriangles.length ; i++) {
+        previousRowOfTriangles[i].setRight(newRowOfTriangles[i+1]);
+      }
+
+      previousRowOfTriangles = newRowOfTriangles;
+
 
       // TODO: process the line. Splitting it on spaces gives you the numbers in
       //       this row; make a NumberTriangle for each one, then wire this row up
